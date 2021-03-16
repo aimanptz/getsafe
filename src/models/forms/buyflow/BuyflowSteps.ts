@@ -3,4 +3,5 @@ export enum BuyflowSteps {
 	email,
 	age,
 	summary,
+	asd,
 }
