@@ -1,32 +1,39 @@
 import React, { useCallback, useState } from 'react';
 import { BuyflowStepProps } from 'models';
 
-interface EmailStepProps extends BuyflowStepProps {
-}
+type EmailStepProps = BuyflowStepProps;
 
 const EmailStep: React.FC<EmailStepProps> = ({ onSubmitStep }) => {
 	const [email, setEmail] = useState('');
 
-	const handleSubmit = useCallback(
-		() => onSubmitStep({ email }),
-		[email, onSubmitStep]
-	);
+	const handleSubmit = useCallback(() => onSubmitStep({ email }), [
+		email,
+		onSubmitStep,
+	]);
 
 	const handleChange = useCallback(
 		({ target }: React.ChangeEvent<HTMLInputElement>) => setEmail(target.value),
-		[]
+		[],
 	);
 
 	return (
 		<>
 			<div>
-				<label>
+				<label htmlFor="email">
 					<span>Email: </span>
-					<input type='email' onChange={handleChange} value={email} />
+					<input
+						type="email"
+						onChange={handleChange}
+						value={email}
+						id="email"
+					/>
 				</label>
 			</div>
-			<button onClick={handleSubmit}>Next</button>
-		</>);
+			<button type="button" onClick={handleSubmit}>
+				Next
+			</button>
+		</>
+	);
 };
 
 export default EmailStep;

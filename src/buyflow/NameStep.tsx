@@ -1,41 +1,47 @@
 import React, { FormEvent, useCallback, useReducer } from 'react';
 import { BuyflowNames, BuyflowStepProps, INameStepData } from 'models';
 
-interface NameStepProps extends BuyflowStepProps {
-}
+type NameStepProps = BuyflowStepProps;
 
-function nameStepReducer(state: INameStepData, nextState: Partial<INameStepData>) {
+function nameStepReducer(
+	state: INameStepData,
+	nextState: Partial<INameStepData>,
+) {
 	return {
 		...state,
 		...nextState,
-	}
+	};
 }
 
-const NameStep: React.FC<NameStepProps> = ({
-	onSubmitStep,
-}) => {
+const NameStep: React.FC<NameStepProps> = ({ onSubmitStep }) => {
 	const [userData, setUserData] = useReducer(nameStepReducer, {
 		[BuyflowNames.firstName]: '',
 		[BuyflowNames.lastName]: '',
 	});
 
-	const handleSubmit = useCallback((e: FormEvent) => {
-		e.preventDefault();
-		onSubmitStep(userData)
-	}, [userData, onSubmitStep]);
+	const handleSubmit = useCallback(
+		(e: FormEvent) => {
+			e.preventDefault();
+			onSubmitStep(userData);
+		},
+		[userData, onSubmitStep],
+	);
 
 	const handleChange = useCallback(
 		({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) => {
 			setUserData({ [name]: value });
-		}, []);
+		},
+		[],
+	);
 
 	return (
 		<form onSubmit={handleSubmit}>
 			<div>
-				<label>
+				<label htmlFor={BuyflowNames.firstName}>
 					<span>First name: </span>
 					<input
-						type='text'
+						type="text"
+						id={BuyflowNames.firstName}
 						name={BuyflowNames.firstName}
 						value={userData.firstName}
 						onChange={handleChange}
@@ -44,10 +50,11 @@ const NameStep: React.FC<NameStepProps> = ({
 				</label>
 			</div>
 			<div>
-				<label>
+				<label htmlFor={BuyflowNames.lastName}>
 					<span>Last name: </span>
 					<input
-						type='text'
+						type="text"
+						id={BuyflowNames.lastName}
 						name={BuyflowNames.lastName}
 						value={userData.lastName}
 						onChange={handleChange}
@@ -55,7 +62,7 @@ const NameStep: React.FC<NameStepProps> = ({
 					/>
 				</label>
 			</div>
-			<button type='submit'>Next</button>
+			<button type="submit">Next</button>
 		</form>
 	);
 };
