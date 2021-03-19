@@ -1,13 +1,9 @@
 import React, { useCallback, useMemo, useReducer } from 'react';
-import { BuyflowNames, BuyflowSteps, IBuyflowData } from 'models';
+import { BuyflowNames, BuyflowSteps, IBuyflowData, ProductIds } from 'models';
 import AgeStep from './AgeStep';
 import EmailStep from './EmailStep';
 import SummaryStep from './SummaryStep';
 import NameStep from './NameStep';
-
-export enum ProductIds {
-	devIns = 'dev_ins',
-}
 
 interface BuyflowProps {
 	productId: ProductIds;

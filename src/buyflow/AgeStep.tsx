@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { BuyflowStepProps } from 'models';
+import { BuyflowNames, BuyflowStepProps } from 'models';
 import { NumberInput } from 'containers';
 
 interface AgeStepProps extends BuyflowStepProps {
@@ -11,19 +11,23 @@ const AgeStep: React.FC<AgeStepProps> = ({
 	const [age, setAge] = useState<number | string>(0);
 
 	const handleSubmit = useCallback(
-		() => onSubmitStep({ age: age ? parseInt(age.toString()) : undefined }),
-		[age, onSubmitStep]
+		() => onSubmitStep({ age: age ? parseInt(age.toString(), 10) : undefined }),
+		[age, onSubmitStep],
 	);
 
 	return (
 		<>
 			<div>
-				<label>
+				<label htmlFor={BuyflowNames.age}>
 					<span>Age:</span>
-					<NumberInput onChange={setAge} value={age} />
+					<NumberInput
+						onChange={setAge}
+						value={age}
+						name={BuyflowNames.age}
+					/>
 				</label>
 			</div>
-			<button onClick={handleSubmit}>Next</button>
+			<button onClick={handleSubmit} type="button">Next</button>
 		</>
 	);
 };
