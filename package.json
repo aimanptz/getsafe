@@ -21,8 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:staged": "cross-env CI=true react-scripts test",
+    "test": "cross-env CI=true react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -69,7 +68,7 @@
     "src/**/*.{ts,tsx}": [
       "eslint --fix",
       "prettier --write",
-      "yarn test:staged"
+      "yarn test"
     ]
   }
 }
