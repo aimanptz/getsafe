@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { BuyflowStepProps } from 'models';
+import { NumberInput } from 'containers';
 
-interface AgeStepProps {
-    cb: (field: string, value: number) => void,
+interface AgeStepProps extends BuyflowStepProps {
 }
 
-const AgeStep: React.FC<AgeStepProps> = (props) => {
-    const [age, setAge] = useState(0);
-    return <>
-        <div>Age: <input type='number' onChange={({target: {value}}) => {setAge(Number(value))}} value={age}></input></div>
-        <button onClick={() => props.cb('age', age)}>Next</button>
-    </>;
+const AgeStep: React.FC<AgeStepProps> = ({
+	onSubmitStep,
+}) => {
+	const [age, setAge] = useState<number | string>(0);
+
+	const handleSubmit = useCallback(
+		() => onSubmitStep({ age: age ? parseInt(age.toString()) : undefined }),
+		[age, onSubmitStep]
+	);
+
+	return (
+		<>
+			<div>
+				<label>
+					<span>Age:</span>
+					<NumberInput onChange={setAge} value={age} />
+				</label>
+			</div>
+			<button onClick={handleSubmit}>Next</button>
+		</>
+	);
 };
 
 export default AgeStep;
