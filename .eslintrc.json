@@ -24,6 +24,7 @@
         "prettier"
     ],
     "rules": {
+        "prettier/prettier": "off",
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "react/jsx-filename-extension": [
@@ -38,20 +39,25 @@
         "import/no-unresolved": [0],
         "import/prefer-default-export": "off",
         "import/extensions": "off",
-        "prettier/prettier": ["error", {
-            "endOfLine": "auto"
-        }],
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "react/jsx-one-expression-per-line": "off",
         "no-use-before-define":"off",
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
         "react/jsx-props-no-spreading": [0],
-        "no-console": [2]
+        "no-console": [2],
+        "@typescript-eslint/no-empty-interface": "off",
+        "arrow-parens": ["error", "as-needed"],
+        "comma-dangle": ["error", "always-multiline"],
+        "jsx-a11y/label-has-associated-control": [ 2, {
+            "labelAttributes": ["label"],
+            "controlComponents": ["NumberInput"],
+            "depth": 3
+        }]
     },
     "overrides": [
         {
-            "files": ["**/*.tsx"],
+            "files": ["**/*.tsx", "**/*.ts"],
             "rules": {
                 "react/prop-types": "off"
             }
