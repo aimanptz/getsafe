@@ -4,17 +4,13 @@ import { useBuyFlowData, useBuyflowForm, useStepperControls } from 'hooks';
 import { Form, Formik } from 'formik';
 import { Box } from '@material-ui/core';
 import { PRODUCTS } from 'utils';
-import { CustomButton } from 'components';
-import AgeStep from './AgeStep';
-import EmailStep from './EmailStep';
-import SummaryStep from './SummaryStep';
-import NameStep from './NameStep';
+import { CustomButton, NameStep, AgeStep, EmailStep, SummaryStep } from 'components';
 
 interface BuyflowProps {
 	productId: ProductIds;
 }
 
-const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
+export const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
 	const { buyflowStepList, validationSchema } = useBuyflowForm();
 	const { collectedData, updateCollectedData } = useBuyFlowData();
 	const { currentStep, increaseCurrentStep } = useStepperControls()
@@ -87,5 +83,3 @@ const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
 		</Formik>
 	);
 };
-
-export default Buyflow;

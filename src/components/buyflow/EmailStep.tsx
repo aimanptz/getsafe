@@ -1,11 +1,9 @@
 import React from 'react';
-import { BuyflowNames, BuyflowStepProps } from 'models';
+import { BuyflowNames } from 'models';
 import { FormControlLabel } from '@material-ui/core';
-import { CustomInputField } from '../containers';
+import { CustomInputField } from 'containers';
 
-type EmailStepProps = BuyflowStepProps;
-
-const EmailStep: React.FC<EmailStepProps> = () => {
+export const EmailStep: React.FC = () => {
 	return (
 		<FormControlLabel
 			label="Email:"
@@ -14,5 +12,3 @@ const EmailStep: React.FC<EmailStepProps> = () => {
 		/>
 	);
 };
-
-export default EmailStep;

@@ -3,7 +3,7 @@ import { IPathRoute, IPathList, IRoute } from 'models';
 export function createRouteList(
 	{ nested, requiredRoles, name }: IRoute,
 	pathList: IPathList,
-	basePath = '',
+	basePath = ''
 ): IPathRoute[] {
 
 	const path = basePath + pathList[name];

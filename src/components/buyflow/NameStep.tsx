@@ -1,11 +1,9 @@
 import React from 'react';
-import { BuyflowNames, BuyflowStepProps } from 'models';
+import { BuyflowNames } from 'models';
 import { Box, FormControlLabel } from '@material-ui/core';
 import { CustomInputField } from 'containers';
 
-type NameStepProps = BuyflowStepProps;
-
-const NameStep: React.FC<NameStepProps> = () => {
+export const NameStep: React.FC = () => {
 	return (
 		<>
 			<Box>
@@ -25,5 +23,3 @@ const NameStep: React.FC<NameStepProps> = () => {
 		</>
 	);
 }
-
-export default NameStep;

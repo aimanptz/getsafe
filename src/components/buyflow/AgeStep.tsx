@@ -1,12 +1,9 @@
 import React from 'react';
-import { BuyflowNames, BuyflowStepProps } from 'models';
+import { BuyflowNames } from 'models';
 import { FormControlLabel } from '@material-ui/core';
 import { CustomInputField } from 'containers';
 
-interface AgeStepProps extends BuyflowStepProps {
-}
-
-const AgeStep: React.FC<AgeStepProps> = () => {
+export const AgeStep: React.FC = () => {
 	return (
 		<FormControlLabel
 			label="Age:"
@@ -15,5 +12,3 @@ const AgeStep: React.FC<AgeStepProps> = () => {
 		/>
 	);
 };
-
-export default AgeStep;
