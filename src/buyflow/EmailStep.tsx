@@ -1,38 +1,17 @@
-import React, { useCallback, useState } from 'react';
-import { BuyflowStepProps } from 'models';
+import React from 'react';
+import { BuyflowNames, BuyflowStepProps } from 'models';
+import { FormControlLabel } from '@material-ui/core';
+import { CustomInputField } from '../containers';
 
 type EmailStepProps = BuyflowStepProps;
 
-const EmailStep: React.FC<EmailStepProps> = ({ onSubmitStep }) => {
-	const [email, setEmail] = useState('');
-
-	const handleSubmit = useCallback(() => onSubmitStep({ email }), [
-		email,
-		onSubmitStep,
-	]);
-
-	const handleChange = useCallback(
-		({ target }: React.ChangeEvent<HTMLInputElement>) => setEmail(target.value),
-		[],
-	);
-
+const EmailStep: React.FC<EmailStepProps> = () => {
 	return (
-		<>
-			<div>
-				<label htmlFor="email">
-					<span>Email: </span>
-					<input
-						type="email"
-						onChange={handleChange}
-						value={email}
-						id="email"
-					/>
-				</label>
-			</div>
-			<button type="button" onClick={handleSubmit}>
-				Next
-			</button>
-		</>
+		<FormControlLabel
+			label="Email:"
+			control={<CustomInputField name={BuyflowNames.email} />}
+			labelPlacement="start"
+		/>
 	);
 };
 

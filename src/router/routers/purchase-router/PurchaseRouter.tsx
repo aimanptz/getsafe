@@ -15,7 +15,7 @@ const viewsMap = {
 const routerList = createRouteListWithComponent(
 	PurchaseRoutes,
 	PathList,
-	viewsMap,
+	viewsMap
 );
 
 const PurchaseRouter = () => {

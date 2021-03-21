@@ -1,82 +1,90 @@
-import React, { useCallback, useMemo, useReducer } from 'react';
-import { BuyflowNames, BuyflowSteps, IBuyflowData, ProductIds } from 'models';
+import React, { useCallback, useMemo } from 'react';
+import { BuyflowSteps, IBuyflowData, ProductIds } from 'models';
+import { useBuyFlowData, useBuyflowForm, useStepperControls } from 'hooks';
+import { Form, Formik } from 'formik';
+import { Box } from '@material-ui/core';
+import { PRODUCTS } from 'utils';
+import { CustomButton } from 'components';
 import AgeStep from './AgeStep';
 import EmailStep from './EmailStep';
 import SummaryStep from './SummaryStep';
 import NameStep from './NameStep';
-import { PRODUCTS } from '../utils';
 
 interface BuyflowProps {
 	productId: ProductIds;
 }
 
-function collectedDataReducer(
-	collectedData: IBuyflowData,
-	newData: Partial<IBuyflowData>
-) {
-	return {
-		...collectedData,
-		...newData,
-	};
-}
-
 const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
-	const buyflowStepList = useMemo(
-		() => [
-			BuyflowSteps.name,
-			BuyflowSteps.email,
-			BuyflowSteps.age,
-			BuyflowSteps.summary,
-		], []);
-
-	const [currentStep, setCurrentStep] = useReducer(
-		(prevStep: number) => prevStep + 1,
-		0
-	);
-
-	const [collectedData, updateCollectedData] = useReducer(
-		collectedDataReducer,
-		{
-			[BuyflowNames.email]: '',
-			[BuyflowNames.age]: 0,
-			[BuyflowNames.firstName]: '',
-			[BuyflowNames.lastName]: '',
-		}
-	);
-
-	const onSubmitStep = useCallback((stepData: Partial<IBuyflowData>) => {
-		updateCollectedData(stepData);
-		setCurrentStep();
-	}, []);
-
-	const buyFlowStep = useMemo(() => {
-		const stepKey = buyflowStepList[currentStep];
-		const buyFlowStepProps = {
-			onSubmitStep,
-		};
-
-		switch (stepKey) {
-			case BuyflowSteps.age:
-				return <AgeStep {...buyFlowStepProps} />;
-			case BuyflowSteps.summary:
-				return <SummaryStep collectedData={collectedData} />;
-			case BuyflowSteps.email:
-				return <EmailStep {...buyFlowStepProps} />;
-			default:
-				return <NameStep {...buyFlowStepProps} />;
-		}
-	}, [currentStep, collectedData, onSubmitStep, buyflowStepList]);
+	const { buyflowStepList, validationSchema } = useBuyflowForm();
+	const { collectedData, updateCollectedData } = useBuyFlowData();
+	const { currentStep, increaseCurrentStep } = useStepperControls()
 
 	const productName = useMemo(
 		() => PRODUCTS.mapIdsToNames[productId],
 		[productId]
 	);
 
+	const stepKey = useMemo(
+		() => buyflowStepList[currentStep],
+		[currentStep, buyflowStepList]
+	);
+
+	const isLastStep = useMemo(
+		() => buyflowStepList.length === currentStep,
+		[buyflowStepList, currentStep]
+	);
+
+	const handleSubmitStep = useCallback((buyFlowData: Partial<IBuyflowData>, actions) => {
+		updateCollectedData(buyFlowData);
+		increaseCurrentStep();
+		actions.setTouched({});
+		actions.setSubmitting(false);
+	}, [increaseCurrentStep, updateCollectedData]);
+
+	const buyFlowStep = useMemo(() => {
+		switch (stepKey) {
+			case BuyflowSteps.age:
+				return <AgeStep />;
+			case BuyflowSteps.email:
+				return <EmailStep />;
+			default:
+				return <NameStep />;
+		}
+	}, [stepKey]);
+
+	const currentValidationSchema = useMemo(
+		() => validationSchema[stepKey],
+		[validationSchema, stepKey]
+	);
+
+	if (isLastStep) {
+		return <SummaryStep collectedData={collectedData} />
+	}
+
 	return (
-		<>
-			<h4>Buying {productName}</h4>
-			{buyFlowStep}
-		</>
+		<Formik
+			initialValues={collectedData}
+			validationSchema={currentValidationSchema}
+			onSubmit={handleSubmitStep}
+		>
+			{
+				({ isSubmitting }) => (
+					<Form id={stepKey}>
+						<h4>Buying {productName}</h4>
+						{buyFlowStep}
+						<Box>
+							<CustomButton
+								type="submit"
+								disabled={isSubmitting}
+								form={stepKey}
+							>
+								Next
+							</CustomButton>
+						</Box>
+					</Form>
+				)
+			}
+		</Formik>
 	);
 };
 

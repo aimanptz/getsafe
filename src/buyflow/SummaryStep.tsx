@@ -15,7 +15,7 @@ const SummaryStep: React.FC<SummaryStepProps> = ({ collectedData }) => {
 			{ title: 'Email', key: BuyflowNames.email },
 			{ title: 'Age', key: BuyflowNames.age },
 		],
-		[],
+		[]
 	);
 
 	const getCollectedValue = useCallback(
@@ -25,7 +25,7 @@ const SummaryStep: React.FC<SummaryStepProps> = ({ collectedData }) => {
 			}
 			return v ?? CONSTANTS.noData;
 		},
-		[],
+		[]
 	);
 
 	return (
@@ -33,7 +33,7 @@ const SummaryStep: React.FC<SummaryStepProps> = ({ collectedData }) => {
 			<ul>
 				{detailsList.map(({ title, key }) => (
 					<li key={title}>{`${title}: ${getCollectedValue(
-						collectedData[key],
+						collectedData[key]
 					)}`}</li>
 				))}
 			</ul>
