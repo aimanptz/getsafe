@@ -5,7 +5,7 @@ import { RoutePathList } from 'router';
 const WelcomePage = () => {
 	return (
 		<>
-			<p>Welcome to Getsafe&apos;s Developer Insurance1</p>
+			<p>Welcome to Getsafe&apos;s Developer Insurance</p>
 			<Link to={RoutePathList.insurance}>Get started!</Link>
 		</>
 	);

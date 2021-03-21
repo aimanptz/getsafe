@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test App.tsx test App component snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="App"
+    style=""
+  >
+    <header
+      class="App-header"
+    >
+      <img
+        alt="logo"
+        class="App-logo"
+        src="logo.svg"
+      />
+    </header>
+    <p>
+      Welcome to Getsafe's Developer Insurance
+    </p>
+    <a
+      href="/purchase/insurance"
+    >
+      Get started!
+    </a>
+  </div>
+</DocumentFragment>
+`;

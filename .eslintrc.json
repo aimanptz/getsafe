@@ -48,7 +48,13 @@
         "no-console": [2],
         "@typescript-eslint/no-empty-interface": "off",
         "arrow-parens": ["error", "as-needed"],
-        "comma-dangle": ["error", "always-multiline"],
+        "comma-dangle": [1, {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline",
+            "functions": "never"
+        }],
         "jsx-a11y/label-has-associated-control": [ 2, {
             "labelAttributes": ["label"],
             "controlComponents": ["NumberInput"],
