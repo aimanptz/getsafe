@@ -15,7 +15,7 @@ const viewsMap = {
 const routerList = createRouteListWithComponent(
 	RootRoutes,
 	PathList,
-	viewsMap,
+	viewsMap
 );
 
 const RootRouter = () => {

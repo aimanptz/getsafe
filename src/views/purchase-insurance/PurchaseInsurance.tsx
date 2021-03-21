@@ -1,5 +1,5 @@
 import React from 'react';
-import Buyflow from 'buyflow/Buyflow';
+import { Buyflow } from 'containers';
 import { ProductIds } from 'models';
 
 const PurchaseInsurance = () => {

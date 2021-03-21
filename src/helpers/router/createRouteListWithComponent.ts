@@ -5,7 +5,7 @@ import { createRouteList } from './createRouteList';
 export function createRouteListWithComponent(
 	routeList: IRoute,
 	pathList: IPathList,
-	viewsMap: Record<string, React.ElementType>,
+	viewsMap: Record<string, React.ElementType>
 ) {
 	return createRouteList(routeList, pathList)
 		.map(route => ({

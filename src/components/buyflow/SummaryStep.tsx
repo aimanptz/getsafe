@@ -7,7 +7,7 @@ interface SummaryStepProps {
 	collectedData: IBuyflowData;
 }
 
-const SummaryStep: React.FC<SummaryStepProps> = ({ collectedData }) => {
+export const SummaryStep: React.FC<SummaryStepProps> = ({ collectedData }) => {
 	const detailsList = useMemo(
 		() => [
 			{ title: 'First name', key: BuyflowNames.firstName },
@@ -43,5 +43,3 @@ const SummaryStep: React.FC<SummaryStepProps> = ({ collectedData }) => {
 		</>
 	);
 };
-
-export default SummaryStep;
