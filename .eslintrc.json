@@ -1,79 +1,110 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended"
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "react-hooks",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".tsx",
+          ".ts"
+        ]
+      }
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "react-hooks",
-        "prettier"
+    "import/no-unresolved": [
+      0
     ],
-    "rules": {
-        "prettier/prettier": "off",
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-        "react/jsx-filename-extension": [
-            1,
-            {
-                "extensions": [
-                    ".tsx",
-                    ".ts"
-                ]
-            }
+    "import/prefer-default-export": "off",
+    "import/extensions": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "no-use-before-define": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "react/jsx-props-no-spreading": [
+      0
+    ],
+    "no-console": [
+      2
+    ],
+    "@typescript-eslint/no-empty-interface": "off",
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "comma-dangle": [
+      1,
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelAttributes": [
+          "label"
         ],
-        "import/no-unresolved": [0],
-        "import/prefer-default-export": "off",
-        "import/extensions": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off",
-        "react/jsx-one-expression-per-line": "off",
-        "no-use-before-define":"off",
-        "no-shadow": "off",
-        "@typescript-eslint/no-shadow": "error",
-        "react/jsx-props-no-spreading": [0],
-        "no-console": [2],
-        "@typescript-eslint/no-empty-interface": "off",
-        "arrow-parens": ["error", "as-needed"],
-        "comma-dangle": [1, {
-            "arrays": "always-multiline",
-            "objects": "always-multiline",
-            "imports": "always-multiline",
-            "exports": "always-multiline",
-            "functions": "never"
-        }],
-        "jsx-a11y/label-has-associated-control": [ 2, {
-            "labelAttributes": ["label"],
-            "controlComponents": ["NumberInput"],
-            "depth": 3
-        }]
-    },
-    "overrides": [
-        {
-            "files": ["**/*.tsx", "**/*.ts"],
-            "rules": {
-                "react/prop-types": "off"
-            }
-        }
-    ],
-    "settings": {
-        "import/resolver": {
-            "node": {
-                "extensions": [".ts", ".tsx"]
-            }
-        }
+        "controlComponents": [
+          "NumberInput"
+        ],
+        "depth": 3
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.tsx",
+        "**/*.ts"
+      ],
+      "rules": {
+        "react/prop-types": "off"
+      }
     }
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
+  }
 }

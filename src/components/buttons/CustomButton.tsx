@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button, ExtendButtonBase, ButtonTypeMap } from '@material-ui/core';
+import { Button, ButtonProps } from '@material-ui/core';
 
-interface CustomButtonProps extends ExtendButtonBase<ButtonTypeMap> {
+interface CustomButtonProps extends ButtonProps {
 }
 
 export const CustomButton: React.FC<CustomButtonProps> = ({children, ...props}) => {
 	return (
-		<Button {...props}>
+		<Button {...props} type="submit">
 			{children}
 		</Button>
 	);

@@ -8,4 +8,5 @@ export const CONSTANTS = {
 		KEYBOARD_KEYS.comma,
 		KEYBOARD_KEYS.dash,
 	],
+	loadingFallback: 'Loading...',
 };
