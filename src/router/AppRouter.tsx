@@ -3,8 +3,8 @@ import React from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { RoutePathList } from 'router/RoutePathList';
 
-const PurchaseRouter = React.lazy(() => import('./routers/PurchaseRouter'));
-const RootRouter = React.lazy(() => import('./routers/RootRouter'));
+const PurchaseRouter = React.lazy(() => import('./routers/purchase-router'));
+const RootRouter = React.lazy(() => import('./routers/root-router'));
 
 const AppRouter = () => {
 	return (

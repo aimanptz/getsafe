@@ -4,18 +4,15 @@ import AgeStep from './AgeStep';
 import EmailStep from './EmailStep';
 import SummaryStep from './SummaryStep';
 import NameStep from './NameStep';
+import { PRODUCTS } from '../utils';
 
 interface BuyflowProps {
 	productId: ProductIds;
 }
 
-const PRODUCT_IDS_TO_NAMES = {
-	[ProductIds.devIns]: 'Developer Insurance',
-};
-
 function collectedDataReducer(
 	collectedData: IBuyflowData,
-	newData: Partial<IBuyflowData>,
+	newData: Partial<IBuyflowData>
 ) {
 	return {
 		...collectedData,
@@ -30,13 +27,11 @@ const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
 			BuyflowSteps.email,
 			BuyflowSteps.age,
 			BuyflowSteps.summary,
-		],
-		[],
-	);
+		], []);
 
 	const [currentStep, setCurrentStep] = useReducer(
 		(prevStep: number) => prevStep + 1,
-		0,
+		0
 	);
 
 	const [collectedData, updateCollectedData] = useReducer(
@@ -46,7 +41,7 @@ const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
 			[BuyflowNames.age]: 0,
 			[BuyflowNames.firstName]: '',
 			[BuyflowNames.lastName]: '',
-		},
+		}
 	);
 
 	const onSubmitStep = useCallback((stepData: Partial<IBuyflowData>) => {
@@ -72,9 +67,10 @@ const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
 		}
 	}, [currentStep, collectedData, onSubmitStep, buyflowStepList]);
 
-	const productName = useMemo(() => PRODUCT_IDS_TO_NAMES[productId], [
-		productId,
-	]);
+	const productName = useMemo(
+		() => PRODUCTS.mapIdsToNames[productId],
+		[productId]
+	);
 
 	return (
 		<>
