@@ -1,17 +1,18 @@
 import React, { useCallback, useMemo } from 'react';
-import { BuyflowSteps, IBuyflowData, ProductIds } from 'models';
+import { IBuyflowData, ProductIds } from 'models';
 import { useBuyFlowData, useBuyflowForm, useStepperControls } from 'hooks';
 import { Form, Formik } from 'formik';
 import { Box } from '@material-ui/core';
 import { PRODUCTS } from 'utils';
-import { CustomButton, NameStep, AgeStep, EmailStep, SummaryStep } from 'components';
+import { CustomButton, SummaryStep } from 'components';
+import { BuyflowStep } from '../buyflow-step';
 
 interface BuyflowProps {
 	productId: ProductIds;
 }
 
 export const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
-	const { buyflowStepList, validationSchema } = useBuyflowForm();
+	const { buyflowStepList, validationSchema, buyflowStepFields } = useBuyflowForm();
 	const { collectedData, updateCollectedData } = useBuyFlowData();
 	const { currentStep, increaseCurrentStep } = useStepperControls()
 
@@ -37,17 +38,6 @@ export const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
 		actions.setSubmitting(false);
 	}, [increaseCurrentStep, updateCollectedData]);
 
-	const buyFlowStep = useMemo(() => {
-		switch (stepKey) {
-			case BuyflowSteps.age:
-				return <AgeStep />;
-			case BuyflowSteps.email:
-				return <EmailStep />;
-			default:
-				return <NameStep />;
-		}
-	}, [stepKey]);
-
 	const currentValidationSchema = useMemo(
 		() => validationSchema[stepKey],
 		[validationSchema, stepKey]
@@ -67,7 +57,7 @@ export const Buyflow: React.FC<BuyflowProps> = ({ productId }) => {
 				({ isSubmitting }) => (
 					<Form id={stepKey}>
 						<h4>Buying {productName}</h4>
-						{buyFlowStep}
+						<BuyflowStep fields={buyflowStepFields[stepKey]} />
 						<Box>
 							<CustomButton
 								type="submit"
